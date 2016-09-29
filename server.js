@@ -3,6 +3,8 @@ var request = require('request')
 
 var app = express();
 
+var port = process.env.PORT || 8080;
+
 
 //schedule
 var optionsSchedule = {
@@ -30,4 +32,6 @@ request(optionsSchedule, function(error, response, body){
 
 
 
-app.listen(8080);
+app.listen(port, function() {
+    console.log('Port:' + port);
+});
