@@ -35,6 +35,7 @@ request(optionsSchedule, function(error, response, body){
 });
 
 app.get('/push', function(req, res){
+  console.log(res.statusCode)
   res.send(notif);
 });
 
