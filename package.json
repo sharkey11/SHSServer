@@ -1,0 +1,14 @@
+{
+  "name": "ServerData",
+  "version": "1.0",
+  "author": "Jack Sharkey",
+  "dependencies": {
+    "express": "3.4.8",
+    "request": "0.10.0"
+  },
+  "engines": {
+    "node": "0.12.7",
+    "npm": "2.7.4",
+    "express": "4.13.3"
+  }
+}
