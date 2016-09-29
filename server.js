@@ -16,7 +16,7 @@ var optionsSchedule = {
 
 setInterval(function(){
   request(optionsSchedule, function(error, response, body){
-    app.get('/schedule', function(req, res){
+    app.get('/', function(req, res){
       res.send(body);
     });
 
