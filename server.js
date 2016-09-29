@@ -4,6 +4,8 @@ var request = require('request')
 var app = express();
 
 var port = process.env.PORT || 8080;
+var notif = {"version" : 13, "message" : "Beta testers, the beta phase is nearing completion. If there are ANY bugs or mishaps, please report them to me immediately. -Jack ","title" : "FINAL MESSAGE FOR BETA TESTERS"}
+
 
 
 //schedule
@@ -28,6 +30,10 @@ request(optionsSchedule, function(error, response, body){
     res.send(body);
   });
 
+});
+
+app.get('/push', function(req, res){
+  res.send(notif);
 });
 
 
