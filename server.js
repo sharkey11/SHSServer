@@ -8,8 +8,8 @@ var port = process.env.PORT || 8080;
 
 //schedule
 var optionsSchedule = {
-  url: 'http://shstv.herokuapp.com/api/schedule/today',
-  port: '80',
+  url: 'https://tv.csapp.westport.k12.ct.us/api/schedule/today',
+  port: '443',
   method: 'GET',
   json:true
 }
@@ -24,7 +24,7 @@ setInterval(function(){
 },1000*60*15)
 
 request(optionsSchedule, function(error, response, body){
-  app.get('/schedule', function(req, res){
+  app.get('/', function(req, res){
     res.send(body);
   });
 
