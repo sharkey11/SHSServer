@@ -29,6 +29,7 @@ setInterval(function(){
 
 request(optionsSchedule, function(error, response, body) {
   console.log("In request block")
+  app.get('/', function(req, res){
     console.log("Status code " + res.statusCode)
     res.send(body);
   });
