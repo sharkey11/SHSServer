@@ -18,6 +18,7 @@ var optionsSchedule = {
 
 setInterval(function(){
   request(optionsSchedule, function(error, response, body){
+    console.log("Status code " + res.statusCode)
     app.get('/', function(req, res){
       console.log(res.statusCode)
       res.send(body);
@@ -26,8 +27,8 @@ setInterval(function(){
   });
 },1000*60*15)
 
-request(optionsSchedule, function(error, response, body){
-  app.get('/', function(req, res){
+request(optionsSchedule, function(error, response, body) {
+  console.log("In request block")
     console.log("Status code " + res.statusCode)
     res.send(body);
   });
@@ -35,7 +36,6 @@ request(optionsSchedule, function(error, response, body){
 });
 
 app.get('/push', function(req, res){
-  console.log("Status code " + res.statusCode)
   res.send(notif);
 });
 
