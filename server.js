@@ -19,6 +19,7 @@ var optionsSchedule = {
 setInterval(function(){
   request(optionsSchedule, function(error, response, body){
     app.get('/', function(req, res){
+      console.log(res.statusCode)
       res.send(body);
     });
 
@@ -27,6 +28,7 @@ setInterval(function(){
 
 request(optionsSchedule, function(error, response, body){
   app.get('/', function(req, res){
+    console.log(res.statusCode)
     res.send(body);
   });
 
