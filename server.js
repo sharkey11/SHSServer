@@ -28,14 +28,14 @@ setInterval(function(){
 
 request(optionsSchedule, function(error, response, body){
   app.get('/', function(req, res){
-    console.log(res.statusCode)
+    console.log("Status code " + res.statusCode)
     res.send(body);
   });
 
 });
 
 app.get('/push', function(req, res){
-  console.log(res.statusCode)
+  console.log("Status code " + res.statusCode)
   res.send(notif);
 });
 
