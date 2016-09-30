@@ -20,7 +20,7 @@ var optionsSchedule = {
 setInterval(function(){
   request(optionsSchedule, function(error, response, body){
     console.log("Status code " + res.statusCode)
-    console.log("Error + " error)
+    console.log("Error  " +  error)
     app.get('/', function(req, res){
       res.send(body);
     });
