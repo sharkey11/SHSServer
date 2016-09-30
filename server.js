@@ -8,8 +8,9 @@ var notif = {"version" : 13, "message" : "Beta testers, the beta phase is nearin
 
 
 
-//schedule
+//schedule details
 var optionsSchedule = {
+  rejectUnauthorized: false,
   url: 'https://tv.csapp.westport.k12.ct.us/api/schedule/today',
   port: '443',
   method: 'GET',
@@ -20,22 +21,21 @@ setInterval(function(){
   request(optionsSchedule, function(error, response, body){
     console.log("Status code " + res.statusCode)
     app.get('/', function(req, res){
-      console.log(res.statusCode)
       res.send(body);
     });
 
   });
 },1000*60*15)
 
+
+//initial request
 request(optionsSchedule, function(error, response, body) {
-  console.log("In request block")
   app.get('/', function(req, res){
-    console.log(res.body)
     res.send(body);
   });
-
 });
 
+//notifcation page
 app.get('/push', function(req, res){
   res.send(notif);
 });
