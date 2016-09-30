@@ -19,7 +19,9 @@ var optionsSchedule = {
 
 setInterval(function(){
   request(optionsSchedule, function(error, response, body){
-    app.get('/hi', function(req, res){
+    console.log("Error  " +  error)
+    console.log("Error  " +  error)
+    app.get('/', function(req, res){
       res.send(body);
     });
 
@@ -29,7 +31,9 @@ setInterval(function(){
 
 //initial request
 request(optionsSchedule, function(error, response, body) {
-  app.get('/hi', function(req, res){
+  console.log("Error  " +  error)
+  console.log(body)
+  app.get('/', function(req, res){
     res.send(body);
   });
 });
