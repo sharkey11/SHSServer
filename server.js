@@ -39,7 +39,7 @@ var rootRef = firebase.database().ref();
 var usersRef = rootRef.child(properlyFormatted);
 
 //if this returns true, get special schedule, otherwise, get day of week and use that one
-console.log(usersRef.isEqual(rootRef.child(properlyFormatted)
+console.log(usersRef.isEqual(rootRef.child(properlyFormatted)))
 // if (usersRef.isEqual(rootRef.child(properlyFormatted))) {
 //
 // }
