@@ -49,9 +49,7 @@ rootRef.on("child_added", function(snapshot) {
 
 function retreiveData() {
   ref.on("value", function(snapshot) {
-    console.log('Running function 1')
      schedule = snapshot.val();
-    console.log(schedule)
 
     if (snapshot.val() !== null) {
       app.get('/', function(req, res){
@@ -60,7 +58,6 @@ function retreiveData() {
     } else {
       var ref2 = db.ref(day);
       ref2.on("value", function(snapshot) {
-        console.log('Running function 2')
          schedule = snapshot.val();
         app.get('/', function(req, res){
           res.send(schedule);
