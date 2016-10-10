@@ -14,6 +14,7 @@ var properlyFormatted = date.getFullYear() + ("0" + (date.getMonth() + 1)).slice
 var days = ['we','m','t','w','r','f','we'];
 var day = days[ date.getDay()];
 
+console.log(properlyFormatted)
 //config database
 var config = {
   apiKey: "AIzaSyA2ZyG13I6qorKu7T9e5fqAs8sj-7KAm_o",
