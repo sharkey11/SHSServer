@@ -11,8 +11,10 @@ var notif = {"version" : 13, "message" : "Beta testers, the beta phase is nearin
 //get today
 var date = new Date();
 var properlyFormatted = date.getFullYear() + ("0" + (date.getMonth() + 1)).slice(-2) + ("0" + date.getDate()).slice(-2);
+var days = ['we','m','t','w','r','f','we'];
+var day = days[ date.getDay()];
 
-//search database
+//config database
 var config = {
   apiKey: "AIzaSyA2ZyG13I6qorKu7T9e5fqAs8sj-7KAm_o",
   authDomain: "shsschedule-3af18.firebaseapp.com",
@@ -34,15 +36,43 @@ var config = {
 firebase.initializeApp(config);
 
 
-
+//search database
 var rootRef = firebase.database().ref();
 var usersRef = rootRef.child(properlyFormatted);
+var db = firebase.database();
+var ref = db.ref(properlyFormatted);
+var schedule;
 
-//if this returns true, get special schedule, otherwise, get day of week and use that one
-console.log(usersRef.isEqual(rootRef.child(properlyFormatted)))
-// if (usersRef.isEqual(rootRef.child(properlyFormatted))) {
-//
-// }
+rootRef.on("child_added", function(snapshot) {
+  retreiveData();
+})
+
+function retreiveData() {
+  ref.on("value", function(snapshot) {
+    console.log('Running function 1')
+     schedule = snapshot.val();
+    console.log(schedule)
+
+    if (snapshot.val() !== null) {
+      app.get('/', function(req, res){
+        res.send(schedule);
+      });
+    } else {
+      var ref2 = db.ref(day);
+      ref2.on("value", function(snapshot) {
+        console.log('Running function 2')
+         schedule = snapshot.val();
+        app.get('/', function(req, res){
+          res.send(schedule);
+        });
+
+      }, function (errorObject) {
+        console.log("The read failed: " + errorObject.code);
+      });
+    }
+  })
+}
+
 
 
 
@@ -54,40 +84,5 @@ app.get('/push', function(req, res){
 
 
 app.listen(port, function() {
-    console.log('Port:' + port);
+  console.log('Port:' + port);
 });
-
-
-
-//old stuff
-
-//
-// //schedule details
-// var optionsSchedule = {
-//   rejectUnauthorized: false,
-//   url: 'https://tv.csapp.westport.k12.ct.us/api/schedule/today',
-//   port: '443',
-//   method: 'GET',
-//   json:true
-// }
-//
-// setInterval(function(){
-//   request(optionsSchedule, function(error, response, body){
-//     console.log("Error  " +  error)
-//     console.log("Error  " +  error)
-//     app.get('/', function(req, res){
-//       res.send(body);
-//     });
-//
-//   });
-// },1000*60*15)
-//
-//
-// //initial request
-// request(optionsSchedule, function(error, response, body) {
-//   console.log("Error  " +  error)
-//   console.log(body)
-//   app.get('/', function(req, res){
-//     res.send(body);
-//   });
-// });
