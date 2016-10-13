@@ -9,12 +9,15 @@ var port = process.env.PORT || 8080;
 var notif = {"version" : 13, "message" : "Beta testers, the beta phase is nearing completion. If there are ANY bugs or mishaps, please report them to me immediately. -Jack ","title" : "FINAL MESSAGE FOR BETA TESTERS"}
 
 //get today
-var date = new Date();
-var properlyFormatted = date.getFullYear() + ("0" + (date.getMonth() + 1)).slice(-2) + ("0" + date.getDate()).slice(-2);
+var properlyFormatted;
+var date;
+setInterval(function(){
+  date = new Date();
+  properlyFormatted = date.getFullYear() + ("0" + (date.getMonth() + 1)).slice(-2) + ("0" + date.getDate()).slice(-2);
+},1000)
 var days = ['we','m','t','w','r','f','we'];
 var day = days[ date.getDay()];
 
-console.log(properlyFormatted)
 //config database
 var config = {
   apiKey: "AIzaSyA2ZyG13I6qorKu7T9e5fqAs8sj-7KAm_o",
