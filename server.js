@@ -53,6 +53,7 @@ rootRef.on("child_added", function(snapshot) {
 })
 
 function retreiveData() {
+  console.log(date)
   ref.on("value", function(snapshot) {
      schedule = snapshot.val();
 
