@@ -2,7 +2,6 @@ var express = require('express');
 var request = require('request')
 var firebase = require('firebase')
 
-console.log('hi')
 
 
 var app = express();
@@ -15,9 +14,16 @@ var date = new Date();
 var properlyFormatted = date.getFullYear() + ("0" + (date.getMonth() + 1)).slice(-2) + ("0" + date.getDate()).slice(-2);
 
 setInterval(function(){
+  var oldProperlyFormatted = properlyFormatted;
   date = new Date();
   properlyFormatted = date.getFullYear() + ("0" + (date.getMonth() + 1)).slice(-2) + ("0" + date.getDate()).slice(-2);
-},1000)
+
+
+  if (oldProperlyFormatted !== properlyFormatted) {
+    retreiveData();
+    console.log('Date change.')
+  }
+}, 5000)
 var days = ['we','m','t','w','r','f','we'];
 var day = days[date.getDay()];
 
@@ -55,7 +61,6 @@ rootRef.on("child_added", function(snapshot) {
 })
 
 function retreiveData() {
-  console.log(date)
   ref.on("value", function(snapshot) {
      schedule = snapshot.val();
 
