@@ -7,7 +7,7 @@ var firebase = require('firebase')
 var app = express();
 
 var port = process.env.PORT || 8080;
-var notif = {"version" : 13, "message" : "Beta testers, the beta phase is nearing completion. If there are ANY bugs or mishaps, please report them to me immediately. -Jack ","title" : "FINAL MESSAGE FOR BETA TESTERS"}
+var notif = {"version" : 14, "message" : "Test 1. 10/16 5:22. Ignore please.","title" : "Testing"}
 
 //get today
 var date = new Date();
