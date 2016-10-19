@@ -58,6 +58,7 @@ var usersRef = rootRef.child(properlyFormatted);
 
 var db = firebase.database();
 var ref = db.ref(properlyFormatted);
+
 var schedule;
 
 rootRef.on("child_added", function(snapshot) {
@@ -69,12 +70,11 @@ rootRefNotif.on("child_added", function(snapshot) {
 })
 
 function retrieveNotif(){
-  ref.on("value", function(snapshot) {
+  rootRefNotif.on("value", function(snapshot) {
      notif = snapshot.val();
-     app.get('/', function(req, res){
+     app.get('/push', function(req, res){
        res.send(notif);
-     });
-
+     })
    })
 }
 function retreiveData() {
@@ -106,9 +106,9 @@ function retreiveData() {
 
 
 //notifcation page
-app.get('/push', function(req, res){
-  res.send(notif);
-});
+// app.get('/push', function(req, res){
+//   res.send(notif);
+// });
 
 
 
