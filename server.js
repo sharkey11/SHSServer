@@ -25,6 +25,7 @@ setInterval(function(){
     console.log('Date change.')
   }
 }, 5000)
+
 var days = ['we','m','t','w','r','f','we'];
 var day = days[date.getDay()];
 
@@ -52,7 +53,9 @@ firebase.initializeApp(config);
 
 //search database
 var rootRef = firebase.database().ref();
+var rootRefNotif = firebase.database().ref("notif");
 var usersRef = rootRef.child(properlyFormatted);
+
 var db = firebase.database();
 var ref = db.ref(properlyFormatted);
 var schedule;
@@ -61,6 +64,19 @@ rootRef.on("child_added", function(snapshot) {
   retreiveData();
 })
 
+rootRefNotif.on("child_added", function(snapshot) {
+  retrieveNotif();
+})
+
+function retrieveNotif(){
+  ref.on("value", function(snapshot) {
+     notif = snapshot.val();
+     app.get('/', function(req, res){
+       res.send(notif);
+     });
+
+   })
+}
 function retreiveData() {
   ref.on("value", function(snapshot) {
      schedule = snapshot.val();
@@ -83,6 +99,8 @@ function retreiveData() {
     }
   })
 }
+
+
 
 
 
