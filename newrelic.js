@@ -10,7 +10,7 @@ exports.config = {
   /**
    * Array of application names.
    */
-  app_name: ['SHS Schedule'],
+  app_name: ['SHS Official'],
   /**
    * Your New Relic license key.
    */
