@@ -6,7 +6,8 @@
   "dependencies": {
     "express": "^4.14.0",
     "firebase": "^3.4.1",
-    "request": "2.75.0"
+    "request": "2.75.0",
+    "newrelic" : "1.32.0"
   },
   "devDependencies": {},
   "scripts": {

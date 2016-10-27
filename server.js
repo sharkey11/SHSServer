@@ -1,7 +1,7 @@
+require('newrelic');
 var express = require('express');
 var request = require('request')
 var firebase = require('firebase')
-require('newrelic');
 
 
 var app = express();
