@@ -1,7 +1,17 @@
 var express = require('express');
 var request = require('request')
 var firebase = require('firebase')
+var ua = require('universal-analytics');
 
+var visitor = ua('UA-XXXX-XX');
+var visitor = ua('UA-XXXX-XX');
+visitor.pageview("/", function (err) {
+  // Handle the error if necessary.
+  // In case no error is provided you can be sure
+  // the request was successfully sent off to Google.
+  console.log('sent')
+  console.log(err)
+});
 
 var app = express();
 
