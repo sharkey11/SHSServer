@@ -1,13 +1,13 @@
 var express = require('express');
 var request = require('request')
 var firebase = require('firebase')
-
+require('newrelic');
 
 
 var app = express();
 
 var port = process.env.PORT || 8080;
-var notif = {"version" : 14, "message" : "Test 1. 10/16 5:22. Ignore please.","title" : "Testing"}
+// var notif = {"version" : 14, "message" : "Test 1. 10/16 5:22. Ignore please.","title" : "Testing"}
 
 //get today
 var date = new Date();
