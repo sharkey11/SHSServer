@@ -34,7 +34,7 @@ setInterval(function(){
   var localMinutes = date.getMinutes();
   var localHours = date.getHours();
 
-  console.log('h:' + localHours + ' m:' localMinutes + ' s:' + localSeconds)
+  console.log('h:' + localHours + ' m:' + localMinutes + ' s:' + localSeconds)
 }, 5000)
 
 var days = ['we','m','t','w','r','f','we'];
