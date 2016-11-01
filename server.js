@@ -6,11 +6,17 @@ var firebase = require('firebase')
 var app = express();
 
 var port = process.env.PORT || 8080;
-// var notif = {"version" : 14, "message" : "Test 1. 10/16 5:22. Ignore please.","title" : "Testing"}
 
 //get today
 var date = new Date();
 var properlyFormatted = date.getFullYear() + ("0" + (date.getMonth() + 1)).slice(-2) + ("0" + date.getDate()).slice(-2);
+
+//get time
+var localSeconds = date.getSeconds();
+var localMinutes = date.getMinutes();
+var localHours = date.getHours();
+
+
 
 setInterval(function(){
   var oldProperlyFormatted = properlyFormatted;
@@ -23,6 +29,12 @@ setInterval(function(){
     retreiveData();
     console.log('Date change.')
   }
+
+  var localSeconds = date.getSeconds();
+  var localMinutes = date.getMinutes();
+  var localHours = date.getHours();
+
+  console.log('h:' + localHours + ' m:' localMinutes + ' s:' + localSeconds)
 }, 5000)
 
 var days = ['we','m','t','w','r','f','we'];
@@ -98,19 +110,6 @@ function retreiveData() {
     }
   })
 }
-
-
-
-
-
-
-
-
-//notifcation page
-// app.get('/push', function(req, res){
-//   res.send(notif);
-// });
-
 
 
 app.listen(port, function() {
