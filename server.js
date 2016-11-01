@@ -88,6 +88,16 @@ function retrieveNotif(){
      })
    })
 }
+
+app.get('/time',function(req,res){
+  var time = new Date();
+  var localSeconds = time.getSeconds();
+  var localMinutes = time.getMinutes();
+  var localHours = time.getHours();
+
+  res.send({"hours":localHours,"mins":localMinutes,"secs":localSeconds})
+})
+
 function retreiveData() {
   ref.on("value", function(snapshot) {
      schedule = snapshot.val();
