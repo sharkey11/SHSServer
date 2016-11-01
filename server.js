@@ -34,7 +34,6 @@ setInterval(function(){
   var localMinutes = date.getMinutes();
   var localHours = date.getHours();
 
-  console.log('h:' + localHours + ' m:' + localMinutes + ' s:' + localSeconds)
 }, 5000)
 
 var days = ['we','m','t','w','r','f','we'];
@@ -111,6 +110,23 @@ function retreiveData() {
       ref2.on("value", function(snapshot) {
          schedule = snapshot.val();
         app.get('/', function(req, res){
+          res.send(schedule);
+        });
+
+      }, function (errorObject) {
+        console.log("The read failed: " + errorObject.code);
+      });
+    }
+
+    if (snapshot.val() !== null) {
+      app.get('/schedule', function(req, res){
+        res.send(schedule);
+      });
+    } else {
+      var ref2 = db.ref(day);
+      ref2.on("value", function(snapshot) {
+         schedule = snapshot.val();
+        app.get('/schedule', function(req, res){
           res.send(schedule);
         });
 
