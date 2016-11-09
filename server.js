@@ -64,11 +64,6 @@ firebase.initializeApp(config);
 //search database
 var rootRef = firebase.database().ref();
 var rootRefNotif = firebase.database().ref("notif");
-var usersRef = rootRef.child(properlyFormatted);
-
-var db = firebase.database();
-var ref = db.ref(properlyFormatted);
-
 var schedule;
 
 rootRef.on("child_added", function(snapshot) {
@@ -94,29 +89,32 @@ app.get('/time',function(req,res){
   var localMinutes = time.getMinutes();
   var localHours = time.getHours();
 
+  // if (localSeconds < 60 && localSeconds > 7) {
+  //   localSeconds =- 7;
+  // } else if (localSeconds < 7) {
+  //   var temp = 60 - localSeconds;
+  //
+  // }
+
   res.send({"hours":localHours,"mins":localMinutes,"secs":localSeconds})
 })
 
 function retreiveData() {
+
+  var usersRef = rootRef.child(properlyFormatted);
+
+  var db = firebase.database();
+  var ref = db.ref(properlyFormatted);
+
   ref.on("value", function(snapshot) {
      schedule = snapshot.val();
 
-    if (snapshot.val() !== null) {
-      app.get('/', function(req, res){
-        res.send(schedule);
-      });
-    } else {
-      var ref2 = db.ref(day);
-      ref2.on("value", function(snapshot) {
-         schedule = snapshot.val();
-        app.get('/', function(req, res){
-          res.send(schedule);
-        });
 
-      }, function (errorObject) {
-        console.log("The read failed: " + errorObject.code);
-      });
-    }
+     app.get('/', function(req, res){
+       res.send('Server managed by Jack Sharkey. Please email sharkeyjack11@gmail.com if you require assistance.');
+     });
+
+
 
     if (snapshot.val() !== null) {
       app.get('/schedule', function(req, res){
