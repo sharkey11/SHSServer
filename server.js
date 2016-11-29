@@ -1,4 +1,5 @@
-var express = require('express');
+var express = require('express')
+
 var request = require('request')
 var firebase = require('firebase')
 
@@ -60,6 +61,9 @@ var config = {
 };
 firebase.initializeApp(config);
 
+function getDayName(dateString) {
+  return ['m','t','w','r','f','we','we'][new Date(dateString).getDay()];
+}
 
 //search database
 var rootRef = firebase.database().ref();
@@ -114,19 +118,44 @@ function retreiveData() {
        res.send('Server managed by Jack Sharkey. Please email sharkeyjack11@gmail.com if you require assistance.');
      });
 
+     var scheduleLink = '/schedule/*'
+
 
 
     if (snapshot.val() !== null) {
-      app.get('/schedule', function(req, res){
+      app.get('scheduleLink', function(req, res){
         res.send(schedule);
+        console.log('url ' + req.url)
       });
     } else {
-      var ref2 = db.ref(day);
-      ref2.on("value", function(snapshot) {
-         schedule = snapshot.val();
+      // var ref2 = db.ref(day);
+      // ref2.on("value", function(snapshot) {
+      //
+      //    schedule = snapshot.val();
+        // app.get(scheduleLink, function(req, res){
         app.get('/schedule', function(req, res){
-          res.send(schedule);
-        });
+
+          // console.log(req.url)
+          // console.log(req.originalUrl)
+          // var full = req.url
+          //
+          // var date = full.substring(10)
+          // var year = date.substring(0,4)
+          // var month = date.substring(4,6)
+          // var day = date.substring(6,8)
+          // var fullDate = year + '-' + month + '-' + day
+          // var whichDay = getDayName(fullDate);
+          //
+          // console.log(fullDate)
+          //
+          // console.log(whichDay)
+          // var ref2 = db.ref(whichDay);
+          // ref2.on("value", function(snapshot) {
+
+          schedule = snapshot.val();
+
+          res.send('[{"name":"6","start_seconds":27000,"end_seconds":30000,"lunch":[]},{"name":"2","start_seconds":30300,"end_seconds":35100,"lunch":[]},{"name":"3","start_seconds":35400,"end_seconds":38400,"lunch":[]},{"name":"1","start_seconds":38700,"end_seconds":44700,"lunch":[{"name":"1","start_seconds":38700,"end_seconds":40500},{"name":"2","start_seconds":40800,"end_seconds":42600},{"name":"3","start_seconds":42900,"end_seconds":44700}]},{"name":"5","start_seconds":45000,"end_seconds":48000,"lunch":[]},{"name":"7","start_seconds":48300,"end_seconds":51300,"lunch":[]}]');
+        // });
 
       }, function (errorObject) {
         console.log("The read failed: " + errorObject.code);
