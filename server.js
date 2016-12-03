@@ -139,13 +139,14 @@ function retreiveData() {
           var date = full.substring(10)
           if (date === "today" || full === "/schedule" || full === "/schedule/") {
             var rightNow = new Date();
-             date = rightNow.toISOString().slice(0,10).replace(/-/g,"");
+            var tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
+            var date = (new Date(Date.now() - tzoffset)).toISOString().slice(0,10).replace(/-/g,"");
             var year = date.substring(0,4)
             var month = date.substring(4,6)
             var day = date.substring(6,8)
             var fullDate = year + '-' + month + '-' + day
             var today = true;
-            console.log(fullDate)
+            console.log(date)
          } else {
           var year = date.substring(0,4)
           var month = date.substring(4,6)
@@ -155,7 +156,7 @@ function retreiveData() {
 
           var whichDay = getDayName(fullDate);
 
-          console.log(whichDay)
+          // console.log(whichDay)
           var ref2 = db.ref(whichDay);
           ref2.on("value", function(snapshot) {
 
