@@ -120,7 +120,6 @@ function retreiveData() {
     var scheduleLink = '/schedule*'
 
 
-
     if (snapshot.val() !== null) {
       app.get(scheduleLink, function(req, res){
         res.send(schedule);
@@ -144,28 +143,48 @@ function retreiveData() {
             var year = date.substring(0,4)
             var month = date.substring(4,6)
             var day = date.substring(6,8)
+            var fullDateDB = year+month+day;
             var fullDate = year + '-' + month + '-' + day
             var today = true;
-            console.log(date)
-         } else {
-          var year = date.substring(0,4)
-          var month = date.substring(4,6)
-          var day = date.substring(6,8)
-          var fullDate = year + '-' + month + '-' + day
-        }
+          } else {
+            var year = date.substring(0,4)
+            var month = date.substring(4,6)
+            var day = date.substring(6,8)
+            var fullDateDB = year+month+day;
+            var fullDate = year + '-' + month + '-' + day
+          }
 
-          var whichDay = getDayName(fullDate);
+          var ref3 = db.ref(fullDateDB);
 
-          // console.log(whichDay)
-          var ref2 = db.ref(whichDay);
-          ref2.on("value", function(snapshot) {
+          ref3.on("value", function(snapshot) {
 
             schedule = snapshot.val();
-            // res.redirect('/schedule/');
 
+
+            if (schedule == null) {
+              console.log('2')
+              var whichDay = getDayName(fullDate);
+              var ref2 = db.ref(whichDay);
+
+              // console.log(whichDay)
+              var ref2 = db.ref(whichDay);
+              ref2.on("value", function(snapshot) {
+
+                schedule = snapshot.val();
+                // res.redirect('/schedule/');
+
+                // console.log(schedule)
+
+
+              })
+            }
             res.send(schedule);
 
           })
+
+
+
+
         })
       });
     }
