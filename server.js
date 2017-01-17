@@ -123,6 +123,7 @@ function retreiveData() {
     if (snapshot.val() !== null) {
       app.get(scheduleLink, function(req, res){
         res.send(schedule);
+        // console.log(schedule)
       });
     } else {
       var ref2 = db.ref(day);
@@ -166,14 +167,14 @@ function retreiveData() {
               var whichDay = getDayName(fullDate);
               var ref2 = db.ref(whichDay);
 
-              // console.log(whichDay)
+              console.log(whichDay)
               var ref2 = db.ref(whichDay);
               ref2.on("value", function(snapshot) {
 
                 schedule = snapshot.val();
                 // res.redirect('/schedule/');
 
-                // console.log(schedule)
+                console.log(schedule)
 
 
               })
