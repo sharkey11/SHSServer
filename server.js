@@ -161,11 +161,13 @@ function retreiveData() {
 
             dates = snapshot.val();
 
-            var type = dates.TYPE
-            console.log(type)
-            if (type == undefined) {
-              type = "X"
+            if (dates !== null) {
+              var type = dates.TYPE
+            } else {
+              var type = "X"
             }
+            console.log(type)
+
             var scheduleDB = db.ref("schedules").child(type);
 
             scheduleDB.on("value", function(snapshot) {
