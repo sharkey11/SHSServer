@@ -19,7 +19,6 @@ var config = {
   "token_uri": "https://accounts.google.com/o/oauth2/token",
   "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
   "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/heroku%40shsschedule-3af18.iam.gserviceaccount.com"
-
 };
 firebase.initializeApp(config);
 
@@ -81,6 +80,7 @@ function retrieveNotif(){
   rootRefNotif.on("value", function(snapshot) {
     notif = snapshot.val();
     app.get('/push', function(req, res){
+      res.header("Access-Control-Allow-Origin", '*');
       res.send(notif);
     })
   })
@@ -114,6 +114,7 @@ function retreiveData() {
 
 
     app.get('/', function(req, res){
+      res.header("Access-Control-Allow-Origin", '*');
       res.send('Server managed by Jack Sharkey. Please email sharkeyjack11@gmail.com if you require assistance.');
     });
 
@@ -122,6 +123,7 @@ function retreiveData() {
 
     if (snapshot.val() !== null) {
       app.get(scheduleLink, function(req, res){
+        res.header("Access-Control-Allow-Origin", '*');
         res.send(schedule);
       });
     } else {
@@ -172,6 +174,7 @@ function retreiveData() {
 
             scheduleDB.on("value", function(snapshot) {
               schedule = snapshot.val();
+              res.header("Access-Control-Allow-Origin", '*');
               res.send(schedule);
 
             })
