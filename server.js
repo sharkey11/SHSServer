@@ -120,7 +120,7 @@ function retreiveData() {
 
     var scheduleLink = '/schedule*'
 
-
+var type;
     if (snapshot.val() !== null) {
       app.get(scheduleLink, function(req, res){
         res.header("Access-Control-Allow-Origin", '*');
@@ -164,7 +164,7 @@ function retreiveData() {
             dates = snapshot.val();
 
             if (dates !== null) {
-              var type = dates.TYPE
+               type = dates.TYPE
             } else {
               var type = "X"
             }
@@ -174,6 +174,8 @@ function retreiveData() {
 
             scheduleDB.on("value", function(snapshot) {
               schedule = snapshot.val();
+              schedule.push({"day":type});
+              console.log(schedule)
               res.header("Access-Control-Allow-Origin", '*');
               res.send(schedule);
 
