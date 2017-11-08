@@ -169,14 +169,12 @@ var type;
             } else {
               var type = "X"
             }
-            console.log(type)
 
             var scheduleDB = db.ref("schedules").child(type);
 
             scheduleDB.on("value", function(snapshot) {
               schedule = snapshot.val();
               schedule.push({"day":type});
-              console.log(schedule)
               res.header("Access-Control-Allow-Origin", '*');
               res.send(schedule);
 
