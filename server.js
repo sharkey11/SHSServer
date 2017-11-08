@@ -98,7 +98,8 @@ app.get('/time',function(req,res){
   //   var temp = 60 - localSeconds;
   //
   // }
-
+  res.header("Access-Control-Allow-Origin", '*');
+  
   res.send({"hours":localHours,"mins":localMinutes,"secs":localSeconds})
 })
 
