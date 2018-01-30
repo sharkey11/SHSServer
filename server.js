@@ -25,8 +25,9 @@ var config = {
 firebase.initializeApp(config);
 
 var app = express();
-var ips = ['ww.hokucode.com./45.55.234.108','45.55.234.108']
+var ips = ['45.55.234.108']
 var port = process.env.PORT || 8080;
+
 
 //get today
 var date = new Date();
@@ -189,8 +190,4 @@ var type;
 }
 
 app.use(ipfilter(ips));
-
-
-app.listen(port, function() {
-  console.log('Port:' + port);
-});
+app.listen(3000);
