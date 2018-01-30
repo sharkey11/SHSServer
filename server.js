@@ -1,4 +1,6 @@
 var express = require('express')
+ipfilter = require('express-ipfilter').IpFilter;
+
 var request = require('request')
 var firebase = require('firebase')
 
@@ -23,7 +25,7 @@ var config = {
 firebase.initializeApp(config);
 
 var app = express();
-
+var ips = ['ww.hokucode.com./45.55.234.108','45.55.234.108']
 var port = process.env.PORT || 8080;
 
 //get today
@@ -186,6 +188,7 @@ var type;
   })
 }
 
+app.use(ipfilter(ips));
 
 
 app.listen(port, function() {
