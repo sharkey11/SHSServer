@@ -83,6 +83,7 @@ function retrieveNotif(){
   rootRefNotif.on("value", function(snapshot) {
     notif = snapshot.val();
     app.get('/push', function(req, res){
+      console.log("sending 1")
       res.header("Access-Control-Allow-Origin", '*');
       res.send(notif);
     })
@@ -102,7 +103,8 @@ app.get('/time',function(req,res){
   //
   // }
   res.header("Access-Control-Allow-Origin", '*');
-  
+  console.log("sending 2")
+
   res.send({"hours":localHours,"mins":localMinutes,"secs":localSeconds})
 })
 
@@ -120,6 +122,8 @@ function retreiveData() {
     app.get('/', function(req, res){
       res.header("Access-Control-Allow-Origin", '*');
       res.send('Server managed by Jack Sharkey. Please email sharkeyjack11@gmail.com if you require assistance.');
+      console.log("sending 3")
+
     });
 
     var scheduleLink = '/schedule*'
@@ -129,6 +133,8 @@ var type;
       app.get(scheduleLink, function(req, res){
         res.header("Access-Control-Allow-Origin", '*');
         res.send(schedule);
+        console.log("sending 3")
+
       });
     } else {
       var ref2 = db.ref(day);
@@ -180,6 +186,7 @@ var type;
               schedule.push({"day":type});
               res.header("Access-Control-Allow-Origin", '*');
               res.send(schedule);
+              console.log("sending 4")
 
             })
           })
